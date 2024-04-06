@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+import React, { useState } from 'react';
+import Header from './components/Header';
+import Main from './components/Main';
+import Footer from './components/Footer';
+const App = ()=>{
+  let [details, setDetails] = useState([
+    {
+      name: "Taye",
+      goods: "clothes",
+      qty: 10
+    },
+    {
+      name: "Kenny",
+      goods: "Bags",
+      qty: 20
+    },
+    {
+      name: "Idowu",
+      goods: "shoes",
+      qty: 30
+    }
+  ]);
+  const increment = (i)=>{
+    let allDetails = [...details];
+    let foundDetail = allDetails.find((_, index)=>index===i);
+    foundDetail.qty++;
+    setDetails(allDetails);
+  }
+  return(
+    <div>
+      <Header/>
+     {details.map((detail, i)=>(
+      <Main key={i} index={i} name={detail.name} goods={detail.goods} qty={detail.qty} increase={increment}/>
+     ))}
+     
+     <Footer/>
+      
     </div>
   );
+
 }
 
+
+
+
+
 export default App;
+
